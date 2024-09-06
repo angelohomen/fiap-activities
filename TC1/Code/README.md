@@ -15,3 +15,7 @@ To do:
 4. Criar um plano para fazer o deploy da API, desenhando a arquitetura do projeto desde a ingestão até a alimentação do modelo.
 
 5. Fazer um MVP realizando o deploy com um link compartilhável e um repositório no github.
+
+```
+    uvicorn main:app --reload
+```
