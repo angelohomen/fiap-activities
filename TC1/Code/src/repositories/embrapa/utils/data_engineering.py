@@ -115,7 +115,7 @@ class DataEngineering:
         to_ret: pd.DataFrame = df
         if col not in df.columns:
             return to_ret
-        to_ret[col] = to_ret[col].str.replace(r'[()]', '', regex=True).str.replace(' ', '_', regex=False).apply(unidecode).str.lower()
+        to_ret[col] = to_ret[col].str.replace(r'[()]', '', regex=True).str.replace(' ', '_', regex=False).str.replace(',', '', regex=False).apply(unidecode).str.lower()
         return to_ret[col]
     
     @classmethod

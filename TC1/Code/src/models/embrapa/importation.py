@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class Import(BaseModel):
+class Importation(BaseModel):
     country: str
     kilograms: float
     dollars: float

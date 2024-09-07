@@ -10,6 +10,7 @@ from src.models.auth.token.token import Token
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import JWTError, jwt
+from src.models.auth.user.create_user_request import CreateUserRequest
 from dotenv import load_dotenv
 import os
 
@@ -27,10 +28,6 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
 unauthorized_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')
-
-class CreateUserRequest(BaseModel):
-    username: str
-    password: str
 
 def get_db():
     db = SessionLocal()
