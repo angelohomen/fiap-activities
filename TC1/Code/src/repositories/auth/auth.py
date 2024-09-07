@@ -6,8 +6,6 @@ from starlette import status
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from dotenv import load_dotenv
-import os
 
 # Models
 from src.models.auth.user.user import User
@@ -17,10 +15,11 @@ bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
 # Environment variables
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
-ALGORITHM = os.getenv('ALGORITHM')
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES'))
+import configparser
+config = configparser.ConfigParser()
+config.read('.env')
+SECRET_KEY = config['API']['SECRET_KEY']
+ALGORITHM = config['API']['ALGORITHM']
 
 # HTTP exceptions
 unauthorized_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Could not validate user.')

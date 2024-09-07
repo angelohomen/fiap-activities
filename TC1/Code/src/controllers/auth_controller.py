@@ -5,8 +5,7 @@ from fastapi import HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm
-from dotenv import load_dotenv
-import os
+import configparser
 
 # Models
 from src.models.auth.user.create_user_request import CreateUserRequest
@@ -15,10 +14,10 @@ from src.models.auth.user.user import User
 from src.models.auth.token.token import Token
 
 # Environment variables
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
-ALGORITHM = os.getenv('ALGORITHM')
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES'))
+import configparser
+config = configparser.ConfigParser()
+config.read('.env')
+ACCESS_TOKEN_EXPIRE_MINUTES = config['API']['ACCESS_TOKEN_EXPIRE_MINUTES']
 
 # Repositories
 from src.repositories.db.sql_alchemy_db import SessionLocal

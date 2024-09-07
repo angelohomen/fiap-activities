@@ -42,31 +42,30 @@ class Embrapa(UrlValidate):
         tab: str
     ) -> Dict[str, str]:
         tab: str = tab.lower()
-        match tab:
-            case 'processamento':
-                return {
-                    'viniferas': '01',
-                    'americanas_e_hibridas': '02',
-                    'uvas_de_mesa': '03',
-                    'sem_classificacao': '04'
-                }
-            case 'importacao':
-                return {
-                    'vinhos_de_mesa': '01',
-                    'espumantes': '02',
-                    'uvas_frescas': '03',
-                    'uvas_passas': '04',
-                    'suco_de_uva': '05'
-                }
-            case 'exportacao':
-                return {
-                    'vinhos_de_mesa': '01',
-                    'espumantes': '02',
-                    'uvas_frescas': '03',
-                    'suco_de_uva': '04'
-                }
-            case _:
-                return {}
+        if tab=='processamento':
+            return {
+                'viniferas': '01',
+                'americanas_e_hibridas': '02',
+                'uvas_de_mesa': '03',
+                'sem_classificacao': '04'
+            }
+        elif tab=='importacao':
+            return {
+                'vinhos_de_mesa': '01',
+                'espumantes': '02',
+                'uvas_frescas': '03',
+                'uvas_passas': '04',
+                'suco_de_uva': '05'
+            }
+        elif tab=='exportacao':
+            return {
+                'vinhos_de_mesa': '01',
+                'espumantes': '02',
+                'uvas_frescas': '03',
+                'suco_de_uva': '04'
+            }
+        else:
+            return {}
 
     @classmethod
     def __validate_years_inputs(

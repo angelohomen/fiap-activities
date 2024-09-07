@@ -17,5 +17,5 @@ To do:
 5. Fazer um MVP realizando o deploy com um link compartilhável e um repositório no github.
 
 ```
-    uvicorn main:app --reload
+    python -m uvicorn main:app --reload
 ```
