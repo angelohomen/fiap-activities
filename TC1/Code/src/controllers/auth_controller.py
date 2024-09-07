@@ -7,6 +7,8 @@ from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm
 import configparser
+from dotenv import load_dotenv
+import os
 
 # Models
 from src.models.auth.user.create_user_request import CreateUserRequest
@@ -15,10 +17,8 @@ from src.models.auth.user.user import User
 from src.models.auth.token.token import Token
 
 # Environment variables
-import configparser
-config = configparser.ConfigParser()
-config.read('.env')
-ACCESS_TOKEN_EXPIRE_MINUTES = config['API']['ACCESS_TOKEN_EXPIRE_MINUTES']
+load_dotenv()
+ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
 
 # Repositories
 from src.repositories.db.sql_alchemy_db import SessionLocal
@@ -51,12 +51,16 @@ async def create_user(db: db_dependency, create_user_request: CreateUserRequest)
         username = create_user_request.username,
         hashed_password = auth.bcrypt_context.hash(create_user_request.password)
     )
-    db.add(create_user_model)
-    db.commit()
-    return {
-        "username": create_user_model.username,
-        "id": create_user_model.id
-    }
+    try:
+        db.add(create_user_model)
+        db.commit()
+        return {
+            "username": create_user_model.username,
+            "id": create_user_model.id
+        }
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=repr(e))
 
 @router.post('/token', status_code=status.HTTP_200_OK, response_model=Token)
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: db_dependency):
