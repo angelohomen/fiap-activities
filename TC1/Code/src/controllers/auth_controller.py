@@ -1,3 +1,4 @@
+# Imports
 from src.repositories.auth import auth
 from datetime import timedelta
 from typing import Annotated

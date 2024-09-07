@@ -7,11 +7,15 @@ from fastapi import status
 from datetime import datetime
 from typing import Dict, List
 from bs4 import BeautifulSoup
+
+# Repositories
 from src.repositories.embrapa.utils.url_validate import UrlValidate
 from src.repositories.embrapa.utils.data_engineering import DataEngineering
 
 # Definitions
 warnings.filterwarnings('ignore')
+
+# Config variables
 config = configparser.ConfigParser()
 config.read('app.config')
 

@@ -1,9 +1,11 @@
+# Imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+import configparser
 import os
 
-import configparser
+# Config variables
 config = configparser.ConfigParser()
 config.read('.env')
 SQL_ALCHEMY_DATABASE_URL = config['SQL']['SQL_ALCHEMY_DATABASE_URL']

@@ -6,6 +6,7 @@ from starlette import status
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
+import configparser
 
 # Models
 from src.models.auth.user.user import User
@@ -14,8 +15,7 @@ from src.models.auth.user.user import User
 bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
-# Environment variables
-import configparser
+# Config variables
 config = configparser.ConfigParser()
 config.read('.env')
 SECRET_KEY = config['API']['SECRET_KEY']
