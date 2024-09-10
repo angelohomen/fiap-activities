@@ -2,11 +2,12 @@
 import requests
 import warnings
 import pandas as pd
-import configparser
 from fastapi import status
 from datetime import datetime
 from typing import Dict, List
 from bs4 import BeautifulSoup
+import os
+from dotenv import load_dotenv
 
 # Repositories
 from src.repositories.embrapa.utils.url_validate import UrlValidate
@@ -15,13 +16,12 @@ from src.repositories.embrapa.utils.data_engineering import DataEngineering
 # Definitions
 warnings.filterwarnings('ignore')
 
-# Config variables
-config = configparser.ConfigParser()
-config.read('app.config')
+# Environment variables
+load_dotenv()
 
 class Embrapa(UrlValidate):
 
-    EMBRAPA_URL: str = config['EMBRAPA']['URL']
+    EMBRAPA_URL: str = os.getenv('EMBRAPA_BASE_URL')
     MIN_YEAR: int = 1970
     MAX_YEAR: int = datetime.today().year - 1
 

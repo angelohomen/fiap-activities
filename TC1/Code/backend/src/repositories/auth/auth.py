@@ -6,7 +6,6 @@ from starlette import status
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-import configparser
 from dotenv import load_dotenv
 import os
 

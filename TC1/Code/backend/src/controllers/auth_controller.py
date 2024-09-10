@@ -6,7 +6,6 @@ from fastapi import HTTPException, APIRouter, Depends
 from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm
-import configparser
 from dotenv import load_dotenv
 import os
 
@@ -21,7 +20,7 @@ load_dotenv()
 ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
 
 # Repositories
-from src.repositories.db.sql_alchemy_db import SessionLocal
+from src.repositories.db.database import SessionLocal
 
 # Instances
 router = APIRouter(

@@ -12,7 +12,7 @@ from src.models.responses.comercializacao_response import ComercializacaoRespons
 
 # Repositories
 from src.repositories.embrapa.embrapa import Embrapa
-from src.repositories.db.sql_alchemy_db import Base, engine, SessionLocal
+from src.repositories.db.database import Base, engine, SessionLocal
 from src.repositories.auth import auth
 
 # Instances
