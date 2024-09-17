@@ -21,6 +21,9 @@ class EmbrapaAPI():
     COMERCIALIZACAO = 'comercializacao'
 
     def __init__(self, username: str, password: str) -> None:
+        '''
+            EmbrapaAPI is a class to manage embrapa-api requests.
+        '''
         self.__token = None
         url = self.__route_construct('/auth/token')
         response = requests.post(url, data={
@@ -40,10 +43,13 @@ class EmbrapaAPI():
         return cls.BASE_URL + route
     
     @property
-    def token(self):
+    def token(self) -> str:
         return self.__token
     
-    def get_user(self):
+    def get_user(self) -> str:
+        '''
+            Returns the authenticated user informations. 
+        '''
         url = self.__route_construct('/auth/user')
         response = requests.get(url, headers=self.__header)
         if response.status_code == status.HTTP_200_OK:
@@ -55,7 +61,16 @@ class EmbrapaAPI():
             self, 
             data: int,
             year_from: int = 1970,
-            year_to: int = datetime.now().year - 1):
+            year_to: int = datetime.now().year - 1) -> str:
+        '''
+            Returns the reversed String.
+
+            Parameters:
+                data (str): Integer representing the wanted data (referenced on EnumEmbrapaAPI class).
+
+            Returns:
+                A json string representing the API response.   
+        '''
         params = {
             'year_from': year_from,
             'year_to': year_to
