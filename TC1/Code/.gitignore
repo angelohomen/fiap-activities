@@ -161,5 +161,8 @@ cython_debug/
 
 # Vercel
 .vercel
+
+# Internal
 *.db
 LOCAL
+Users.txt
